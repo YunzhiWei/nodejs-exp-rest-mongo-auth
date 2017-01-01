@@ -41,7 +41,7 @@ var dishSchema = new Schema(
     category: {
       type: String
     },
-    lable: {
+    label: {
       type: String,
       default: ''
     },

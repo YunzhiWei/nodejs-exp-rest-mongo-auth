@@ -16,7 +16,7 @@ var promotionSchema = new Schema(
     image: {
       type: String
     },
-    lable: {
+    label: {
       type: String
     },
     price: {
