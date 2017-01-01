@@ -19,3 +19,9 @@ run the app:
 ```
 npm install -S mongoose mongoose-currency
 ```
+
+# add static files in public folder
+
+# add routers files in routes folder
+
+# enable new routers in app.js
