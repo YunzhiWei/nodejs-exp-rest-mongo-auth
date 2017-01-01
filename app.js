@@ -1,3 +1,4 @@
+// dependencies
 var express       = require('express');
 var path          = require('path');
 var favicon       = require('serve-favicon');
@@ -12,6 +13,7 @@ var Dishes        = require('./models/dishes');
 var Leaders       = require('./models/leaders');
 var Promotions    = require('./models/promotions');
 
+// connect to mongodb
 var url = 'mongodb://localhost:27017/conFusion';
 mongoose.connect(url);
 var db = mongoose.connection;
@@ -22,6 +24,7 @@ db.once('open', function () {
 
 });
 
+// web app
 var app = express();
 
 // view engine setup
