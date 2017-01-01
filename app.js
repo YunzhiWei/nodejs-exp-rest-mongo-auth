@@ -7,6 +7,9 @@ var bodyParser    = require('body-parser');
 var mongoose      = require('mongoose');
 var assert        = require('assert');
 
+// models
+var Dishes        = require('./models/dishes');
+
 var url = 'mongodb://localhost:27017/conFusion';
 mongoose.connect(url);
 var db = mongoose.connection;

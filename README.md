@@ -35,3 +35,5 @@ npm install -S assert
 # create `Dish` model in `models` folder
 
 # connect to mongodb server
+
+# include models in `app.js`
