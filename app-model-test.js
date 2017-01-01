@@ -95,6 +95,7 @@ db.once('open', function () {
     {
       name: 'Dish4',
       description: 'Test3',
+      price: '12.55',
       comments: [
         {
             rating: 3,
@@ -117,7 +118,8 @@ db.once('open', function () {
             id,
             {
               $set: {
-                description: 'Updated Test'
+                description: 'Updated Test',
+                price: '18.99'
               }
             },
             {
