@@ -25,3 +25,9 @@ npm install -S mongoose mongoose-currency
 # add routers files in routes folder
 
 # enable new routers in app.js
+
+# npm install assert
+
+```
+npm install -S assert
+```
