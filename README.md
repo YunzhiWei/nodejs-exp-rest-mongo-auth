@@ -37,3 +37,7 @@ npm install -S assert
 # connect to mongodb server
 
 # include models in `app.js`
+
+# test model
+
+# update model
