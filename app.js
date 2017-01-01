@@ -89,6 +89,71 @@ db.once('open', function () {
     }
   );
 */
+/* This is Test 3
+// create a new dish
+  Dishes.create(
+    {
+      name: 'Dish4',
+      description: 'Test3',
+      comments: [
+        {
+            rating: 3,
+            comment: 'This is insane',
+            author: 'Matt Daemon'
+        }
+      ]
+    },
+    function (err, dish) {
+      if (err) throw err;
+      console.log('Dish3 created!');
+      console.log("Dish.create: ", dish);
+
+      var id = dish._id;
+
+      // get all the dishes
+      setTimeout(
+        function () {
+          Dishes.findByIdAndUpdate(
+            id,
+            {
+              $set: {
+                description: 'Updated Test'
+              }
+            },
+            {
+              new: true
+            }
+          )
+          .exec(function (err, dish) {
+            if (err) throw err;
+            console.log('Updated Dish!');
+            console.log("Dish.findByIdAndUpdate: ", dish);
+
+            dish.comments.push(
+              {
+                rating: 5,
+                comment: 'I\'m getting a sinking feeling!',
+                author: 'Leonardo di Carpaccio'
+              }
+            );
+
+            dish.save(function (err, dish) {
+              console.log('Updated Comments!');
+              console.log("dish.save: ", dish);
+
+              db.collection('dishes').drop(function () {
+                console.log('Dish3 dropped!');
+                db.close();
+              });
+            });
+          });
+        },
+        3000
+      );
+    }
+  );
+*/
+
 });
 
 var app = express();

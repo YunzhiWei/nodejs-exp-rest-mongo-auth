@@ -41,3 +41,5 @@ npm install -S assert
 # test model
 
 # update model
+
+# test updated model
