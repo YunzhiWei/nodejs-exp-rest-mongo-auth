@@ -33,3 +33,5 @@ npm install -S assert
 ```
 
 # create `Dish` model in `models` folder
+
+# connect to mongodb server
