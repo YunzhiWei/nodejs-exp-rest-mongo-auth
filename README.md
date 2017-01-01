@@ -43,3 +43,7 @@ npm install -S assert
 # update model
 
 # test updated model
+
+# dupliate a copy of `app.js`
+
+# remove the test code from `app.js`
