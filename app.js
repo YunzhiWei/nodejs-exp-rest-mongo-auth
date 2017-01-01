@@ -9,6 +9,8 @@ var assert        = require('assert');
 
 // models
 var Dishes        = require('./models/dishes');
+var Leaders       = require('./models/leaders');
+var Promotions    = require('./models/promotions');
 
 var url = 'mongodb://localhost:27017/conFusion';
 mongoose.connect(url);
