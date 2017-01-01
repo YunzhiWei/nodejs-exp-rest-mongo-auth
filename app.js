@@ -15,8 +15,34 @@ mongoose.connect(url);
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function () {
-    // we're connected!
-    console.log("Connected correctly to mongodb server");
+  // we're connected!
+  console.log("Connected correctly to mongodb server");
+
+  // create a new dish
+  var newDish = Dishes({
+    name:         'Uthapizza',
+    description:  'Test'
+  });
+
+  // save the dish
+  newDish.save(function (err) {
+    if (err) throw err;
+    console.log('Dish created!');
+
+    // get all the users
+    Dishes.find({}, function (err, dishes) {
+      if (err) throw err;
+      console.log('Dish found!');
+
+      // object of all the users
+      console.log(dishes);
+
+      db.collection('dishes').drop(function () {
+        console.log('Dish dropped!');
+        db.close();
+      });
+    });
+  });
 });
 
 var app = express();
