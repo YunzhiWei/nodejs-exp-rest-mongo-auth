@@ -18,31 +18,77 @@ db.once('open', function () {
   // we're connected!
   console.log("Connected correctly to mongodb server");
 
+/* This is Test 1
   // create a new dish
   var newDish = Dishes({
-    name:         'Uthapizza',
-    description:  'Test'
+    name:         'Dish1',
+    description:  'Test1'
   });
 
   // save the dish
   newDish.save(function (err) {
     if (err) throw err;
-    console.log('Dish created!');
+    console.log('Dish1 created!');
 
     // get all the users
     Dishes.find({}, function (err, dishes) {
       if (err) throw err;
-      console.log('Dish found!');
+      console.log('Dish1 found!');
 
       // object of all the users
       console.log(dishes);
 
       db.collection('dishes').drop(function () {
-        console.log('Dish dropped!');
+        console.log('Dish1 dropped!');
         db.close();
       });
     });
   });
+*/
+/* This is Test 2
+  // create a new dish
+  Dishes.create(
+    {
+      name: 'Dish2',
+      description: 'Test2'
+    },
+    function (err, dish) {
+      if (err) throw err;
+      console.log('Dish2 created!');
+      console.log("Dishes.create: ", dish);
+
+      var id = dish._id;
+
+      // get all the dishes
+      setTimeout(
+        function () {
+          Dishes.findByIdAndUpdate(
+            id,
+            {
+              $set: {
+                description: 'Updated Test'
+              }
+            },
+            {
+              new: true
+            }
+          )
+          .exec(function (err, dish) {
+            if (err) throw err;
+            console.log('Updated Dish!');
+            console.log("Dishes.findByIdAndUpdate: ", dish);
+
+            db.collection('dishes').drop(function () {
+              console.log('Dish2 dropped!');
+              db.close();
+            });
+          });
+        },
+        3000
+      );
+    }
+  );
+*/
 });
 
 var app = express();
