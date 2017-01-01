@@ -14,20 +14,22 @@ run the app:
 
 # npm install
 
-# npm install mongoose mongoose-currency --save
+# npm install `mongoose` and `mongoose-currency`
 
 ```
 npm install -S mongoose mongoose-currency
 ```
 
-# add static files in public folder
+# add static files in `public` folder
 
-# add routers files in routes folder
+# add routers files in `routes` folder
 
-# enable new routers in app.js
+# enable new routers in `app.js`
 
-# npm install assert
+# npm install `assert`
 
 ```
 npm install -S assert
 ```
+
+# create `Dish` model in `models` folder
