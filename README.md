@@ -59,6 +59,11 @@ npm install -S passport passport-local passport-local-mongoose
 npm install -S jsonwebtoken
 ```
 
+# add `config.js`
+
+# add helper `verify.js`
+
+# add `User` model
 
 # lesson and learn
 
