@@ -71,6 +71,10 @@ npm install -S jsonwebtoken
 * `login`
 * `logout`
 
+# config passport in `app.js`
+
+# verify user privilige for special routes in `routes/dishes.js`
+
 # lesson and learn
 
 * DONT put any thing in the body when sending DELETE request

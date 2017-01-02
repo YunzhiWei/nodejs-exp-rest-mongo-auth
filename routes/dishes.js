@@ -11,7 +11,7 @@ var router = express.Router();
 router.use(bodyParser.json());
 
 router.route('/')
-.get(function(req,res,next){
+.get(Verify.verifyOrdinaryUser, function(req,res,next){
   Dishes.find(
     {},
     function (err, dish) {
@@ -20,7 +20,7 @@ router.route('/')
     }
   );
 })
-.post(function(req, res, next){
+.post(Verify.verifyOrdinaryUser, function(req, res, next){
   Dishes.create(
     req.body,
     function (err, dish) {
@@ -35,7 +35,7 @@ router.route('/')
     }
   );
 })
-.delete(function(req, res, next){
+.delete(Verify.verifyOrdinaryUser, function(req, res, next){
   Dishes.remove(
     {},
     function (err, resp) {
