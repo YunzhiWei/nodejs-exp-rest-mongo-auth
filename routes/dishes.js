@@ -80,4 +80,113 @@ router.route('/:dishId')
   );
 });
 
+// nested router
+// var commentRouter = express.Router({mergeParams: true});
+// router.use('/:dishId/comments', commentRouter);
+
+// commentRouter.route('/')
+router.route('/:dishId/comments')
+.get(function (req, res, next) {
+  Dishes.findById(
+    req.params.dishId,
+    function (err, dish) {
+      if (err) throw err;
+      res.json(dish.comments);
+    }
+  );
+})
+.post(function (req, res, next) {
+  Dishes.findById(
+    req.params.dishId,
+    function (err, dish) {
+      if (err) throw err;
+      dish.comments.push(req.body);
+      dish.save(function (err, dish) {
+        if (err) throw err;
+        console.log('Updated Comments!');
+        res.json(dish);
+      });
+    }
+  );
+})
+.delete(function (req, res, next) {
+  Dishes.findById(
+    req.params.dishId,
+    function (err, dish) {
+      if (err) throw err;
+      for (var i = (dish.comments.length - 1); i >= 0; i--) {
+        dish.comments.id(dish.comments[i]._id).remove();
+      }
+      dish.save(function (err, result) {
+        if (err) throw err;
+        res.writeHead(200, {
+          'Content-Type': 'text/plain'
+        });
+        res.end('Deleted all comments!');
+      });
+    }
+  );
+});
+
+// commentRouter.route('/:commentId')
+router.route('/:dishId/comments/:commentId')
+.get(function (req, res, next) {
+  console.log("req.params: ", req.params);
+  Dishes.findById(
+    req.params.dishId,
+    function (err, dish) {
+      if (err) throw err;
+      res.json(dish.comments.id(req.params.commentId));
+    }
+  );
+})
+.put(function (req, res, next) {
+  // !!!!!!!!!!!!!    IMPORTANT !!!!!!!!!!!!
+  // !!!!!!!!!!!!! PLEASE READ FIRST !!!!!!!
+  // We delete the existing commment and insert the updated
+  // comment as a new comment
+  // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  // So, you MUST input complete comment fields in the req.body
+
+  console.log("req.params: ", req.params);
+  console.log("req.body: ", req.body);
+  if (
+    (req.body.rating == null) ||
+    (req.body.comment == null) ||
+    (req.body.author == null) )
+  {
+    console.log('Imcomplete body fields!');
+    res.end('Please prepare all fields!');
+    return;
+  }
+
+  Dishes.findById(
+    req.params.dishId,
+    function (err, dish) {
+      if (err) throw err;
+      dish.comments.id(req.params.commentId).remove();
+      dish.comments.push(req.body);
+      dish.save(function (err, resp) {
+        if (err) throw err;
+        console.log('Updated Comments!');
+        res.json(resp);
+      });
+    }
+  );
+})
+.delete(function (req, res, next) {
+  console.log("req.params: ", req.params);
+  Dishes.findById(
+    req.params.dishId,
+    function (err, dish) {
+      if (err) throw err;
+      dish.comments.id(req.params.commentId).remove();
+      dish.save(function (err, resp) {
+        if (err) throw err;
+        res.json(resp);
+      });
+    }
+  );
+});
+
 module.exports = router;

@@ -50,6 +50,7 @@ npm install -S assert
 
 # update routers to support RESTful API
 
+# nested router for embedded docuement
 
 
 # lesson and learn
