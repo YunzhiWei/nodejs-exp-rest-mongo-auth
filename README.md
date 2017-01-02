@@ -52,6 +52,13 @@ npm install -S assert
 
 # nested router for embedded docuement
 
+# npm install `passport` & `jwt`
+
+```
+npm install -S passport passport-local passport-local-mongoose
+npm install -S jsonwebtoken
+```
+
 
 # lesson and learn
 
