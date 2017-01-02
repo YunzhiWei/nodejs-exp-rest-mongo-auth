@@ -50,6 +50,15 @@ npm install -S assert
 
 # update routers to support RESTful API
 
+
+
+# lesson and learn
+
+* DONT put any thing in the body when sending DELETE request
+
+> else you may happen to the following error:
+> `SyntaxError: Unexpected token r in JSON at position 4`
+
 # test documents for models
 
 ```
