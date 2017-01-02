@@ -65,6 +65,12 @@ npm install -S jsonwebtoken
 
 # add `User` model
 
+# add `User` routes
+
+* `register`
+* `login`
+* `logout`
+
 # lesson and learn
 
 * DONT put any thing in the body when sending DELETE request
