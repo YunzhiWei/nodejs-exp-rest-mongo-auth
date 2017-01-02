@@ -10,7 +10,9 @@ var assert        = require('assert');
 var passport      = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 
-// models (just used when testing)
+// models
+var User = require('./models/users');
+// just used for testing
 // var Dishes        = require('./models/dishes');
 // var Leaders       = require('./models/leaders');
 // var Promotions    = require('./models/promotions');
@@ -44,7 +46,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 // passport config
-var User = require('./models/user');
 app.use(passport.initialize());
 passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
