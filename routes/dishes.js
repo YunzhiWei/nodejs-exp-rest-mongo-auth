@@ -13,13 +13,12 @@ router.use(bodyParser.json());
 
 router.route('/')
 .get(Verify.verifyOrdinaryUser, function(req,res,next){
-  Dishes.find(
-    {},
-    function (err, dish) {
-      if (err) throw err;
-      res.json(dish);
-    }
-  );
+  Dishes.find({})
+  .populate('comments.postedBy')
+  .exec(function (err, dish) {
+    if (err) throw err;
+    res.json(dish);
+  });
 })
 .post(Verify.verifyOrdinaryUser, function(req, res, next){
   Dishes.create(
@@ -48,13 +47,12 @@ router.route('/')
 
 router.route('/:dishId')
 .get(function(req,res,next){
-  Dishes.findById(
-    req.params.dishId,
-    function (err, dish) {
-      if (err) throw err;
-      res.json(dish);
-    }
-  );
+  Dishes.findById(req.params.dishId)
+  .populate('comments.postedBy')
+  .exec(function (err, dish) {
+    if (err) throw err;
+    res.json(dish);
+  });
 })
 .put(function(req, res, next){
   Dishes.findByIdAndUpdate(
@@ -87,20 +85,21 @@ router.route('/:dishId')
 
 // commentRouter.route('/')
 router.route('/:dishId/comments')
+.all(Verify.verifyOrdinaryUser)
 .get(function (req, res, next) {
-  Dishes.findById(
-    req.params.dishId,
-    function (err, dish) {
-      if (err) throw err;
-      res.json(dish.comments);
-    }
-  );
+  Dishes.findById(req.params.dishId)
+  .populate('comments.postedBy')
+  .exec(function (err, dish) {
+    if (err) throw err;
+    res.json(dish.comments);
+  });
 })
 .post(function (req, res, next) {
   Dishes.findById(
     req.params.dishId,
     function (err, dish) {
       if (err) throw err;
+      req.body.postedBy = req.decoded._doc._id;
       dish.comments.push(req.body);
       dish.save(function (err, dish) {
         if (err) throw err;
@@ -110,7 +109,7 @@ router.route('/:dishId/comments')
     }
   );
 })
-.delete(function (req, res, next) {
+.delete(Verify.verifyAdmin, function (req, res, next) {
   Dishes.findById(
     req.params.dishId,
     function (err, dish) {
@@ -131,15 +130,15 @@ router.route('/:dishId/comments')
 
 // commentRouter.route('/:commentId')
 router.route('/:dishId/comments/:commentId')
+.all(Verify.verifyOrdinaryUser)
 .get(function (req, res, next) {
   console.log("req.params: ", req.params);
-  Dishes.findById(
-    req.params.dishId,
-    function (err, dish) {
-      if (err) throw err;
-      res.json(dish.comments.id(req.params.commentId));
-    }
-  );
+  Dishes.findById(req.params.dishId)
+  .populate('comments.postedBy')
+  .exec(function (err, dish) {
+    if (err) throw err;
+    res.json(dish.comments.id(req.params.commentId));
+  });
 })
 .put(function (req, res, next) {
   // !!!!!!!!!!!!!    IMPORTANT !!!!!!!!!!!!
@@ -152,9 +151,9 @@ router.route('/:dishId/comments/:commentId')
   console.log("req.params: ", req.params);
   console.log("req.body: ", req.body);
   if (
-    (req.body.rating == null) ||
+    (req.body.rating  == null) ||
     (req.body.comment == null) ||
-    (req.body.author == null) )
+    (req.body.author  == null) )
   {
     console.log('Imcomplete body fields!');
     res.end('Please prepare all fields!');
@@ -166,6 +165,7 @@ router.route('/:dishId/comments/:commentId')
     function (err, dish) {
       if (err) throw err;
       dish.comments.id(req.params.commentId).remove();
+      req.body.postedBy = req.decoded._doc._id;
       dish.comments.push(req.body);
       dish.save(function (err, resp) {
         if (err) throw err;
@@ -181,6 +181,11 @@ router.route('/:dishId/comments/:commentId')
     req.params.dishId,
     function (err, dish) {
       if (err) throw err;
+      if(dish.comments.id(req.params.commentId).postedBy != req.decoded._doc._id) {
+        var err = new Error('You are not the author, you cannot perform this operation!');
+        err.status = 403;
+        return next(err);
+      }
       dish.comments.id(req.params.commentId).remove();
       dish.save(function (err, resp) {
         if (err) throw err;
