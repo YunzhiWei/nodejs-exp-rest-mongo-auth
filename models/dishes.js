@@ -61,7 +61,7 @@ var dishSchema = new Schema(
 
 // the schema is useless so far
 // we need to create a model using it
-var Dishes = mongoose.model('Dish', dishSchema);
+var Dish = mongoose.model('Dish', dishSchema);
 
 // make this available to our Node applications
-module.exports = Dishes;
+module.exports = Dish;

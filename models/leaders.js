@@ -30,7 +30,7 @@ var leaderSchema = new Schema(
 
 // the schema is useless so far
 // we need to create a model using it
-var Leaders = mongoose.model('Leadership', leaderSchema);
+var Leader = mongoose.model('Leadership', leaderSchema);
 
 // make this available to our Node applications
-module.exports = Leaders;
+module.exports = Leader;
