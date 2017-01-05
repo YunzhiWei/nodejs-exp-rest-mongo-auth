@@ -1,7 +1,9 @@
 # nodejs-exp-rest-mongo-auth
 This is a nodejs project to include some general technical foundation parts.
 
-# express the project
+# Record
+
+## express the project
 
 ```
 > express nodejs-exp-rest-mongo-auth
@@ -12,74 +14,90 @@ run the app:
      > SET DEBUG=nodejs-exp-rest-mongo-auth:* & npm start
 ```
 
-# npm install
+## npm install
 
-# npm install `mongoose` and `mongoose-currency`
+## npm install `mongoose` and `mongoose-currency`
 
 ```
 npm install -S mongoose mongoose-currency
 ```
 
-# add static files in `public` folder
+## add static files in `public` folder
 
-# add routers files in `routes` folder
+## add routers files in `routes` folder
 
-# enable new routers in `app.js`
+## enable new routers in `app.js`
 
-# npm install `assert`
+## npm install `assert`
 
 ```
 npm install -S assert
 ```
 
-# create `Dish` model in `models` folder
+## create `Dish` model in `models` folder
 
-# connect to mongodb server
+## connect to mongodb server
 
-# include models in `app.js`
+## include models in `app.js`
 
-# test model
+## test model
 
-# update model
+## update model
 
-# test updated model
+## test updated model
 
-# dupliate a copy of `app.js`
+## dupliate a copy of `app.js`
 
-# remove the test code from `app.js`
+## remove the test code from `app.js`
 
-# update routers to support RESTful API
+## update routers to support RESTful API
 
-# nested router for embedded docuement
+## nested router for embedded docuement
 
-# npm install `passport` & `jwt`
+## npm install `passport` & `jwt`
 
 ```
 npm install -S passport passport-local passport-local-mongoose
 npm install -S jsonwebtoken
 ```
 
-# add `config.js`
+## add `config.js`
 
-# add helper `verify.js`
+## add helper `verify.js`
 
-# add `User` model
+## add `User` model
 
-# add `User` routes
+## add `User` routes
 
 * `register`
 * `login`
 * `logout`
 
-# config passport in `app.js`
+## config passport in `app.js`
 
-# verify user privilige for special routes in `routes/dishes.js`
+## verify user privilige for special routes in `routes/dishes.js`
 
-# dedicate verifications for `ordinary user` and `admin`
+## dedicate verifications for `ordinary user` and `admin`
 
-# more properties for `User` model, and model `method`
+## more properties for `User` model, and model `method`
 
-# embedded link and `population` in mongodb
+## embedded link and `population` in mongodb
+
+## https
+
+* Go to the `bin` folder and then create the private key and certificate by typing the following at the prompt:
+
+```
+> openssl genrsa 1024 > private.key
+> openssl req -new -key private.key -out cert.csr
+> openssl x509 -req -in cert.csr -signkey private.key -out certificate.pem
+```
+
+> Note for Windows Users
+>
+If you are using a Windows machine, you may need to install openssl. You can find some openssl binary distributions [here](https://wiki.openssl.org/index.php/Binaries). Also, this [article](https://blog.didierstevens.com/2015/03/30/howto-make-your-own-cert-with-openssl-on-windows/) gives the steps for generating the certificates in Windows. Another [article](http://www.faqforge.com/windows/use-openssl-on-windows/) provides similar instructions. Here's an [online service](http://www.selfsignedcertificate.com/) to generate self-signed certificates.
+>
+Here we use the online tool to generate the key and certificate.
 
 # lesson and learn
 

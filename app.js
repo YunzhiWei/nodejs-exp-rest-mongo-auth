@@ -51,6 +51,17 @@ passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
+// Secure traffic only
+app.all('*', function(req, res, next){
+  console.log('req start: ',req.secure, req.hostname, req.url, app.get('port'));
+  if (req.secure) {
+    return next();
+  };
+
+  console.log('Redirect!');
+  res.redirect('https://'+req.hostname+':'+app.get('secPort')+req.url);
+});
+
 // routers
 app.use(express.static(path.join(__dirname, 'public')));
 
